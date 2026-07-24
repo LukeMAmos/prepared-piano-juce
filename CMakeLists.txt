@@ -27,12 +27,20 @@ juce_add_plugin(PreparedSynth
 
 juce_generate_juce_header(PreparedSynth)
 
+
 target_sources(PreparedSynth
     PRIVATE
 		Source/PluginProcessor.cpp
         Source/PluginProcessor.h
         Source/PluginEditor.cpp
         Source/PluginEditor.h
+)
+
+source_group("Source" FILES
+    Source/PluginProcessor.cpp
+    Source/PluginProcessor.h
+    Source/PluginEditor.cpp
+    Source/PluginEditor.h
 )
 
 target_compile_definitions(PreparedSynth
