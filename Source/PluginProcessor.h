@@ -1,5 +1,6 @@
 #pragma once
 #include <JuceHeader.h>
+#include "SynthVoice.h"
 
 class PreparedSynthAudioProcessor : public juce::AudioProcessor
 {

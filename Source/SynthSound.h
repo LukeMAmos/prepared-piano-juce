@@ -1,5 +1,5 @@
 #pragma once
-#include "juce_audio_basics/juce_audio_basics.h"
+#include <juce_audio_basics/juce_audio_basics.h>
 
 class SynthSound : public juce::SynthesiserSound
 {
@@ -20,4 +20,4 @@ public:
 private:
     
     
-}
+};
