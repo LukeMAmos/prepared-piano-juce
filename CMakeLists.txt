@@ -34,6 +34,9 @@ target_sources(PreparedSynth
         Source/PluginProcessor.h
         Source/PluginEditor.cpp
         Source/PluginEditor.h
+        Source/SynthSound.h
+        Source/SynthVoice.h
+        Source/SynthVoice.cpp
 )
 
 source_group("Source" FILES
@@ -41,6 +44,9 @@ source_group("Source" FILES
     Source/PluginProcessor.h
     Source/PluginEditor.cpp
     Source/PluginEditor.h
+    Source/SynthSound.h
+    Source/SynthVoice.h
+    Source/SynthVoice.cpp
 )
 
 target_compile_definitions(PreparedSynth
