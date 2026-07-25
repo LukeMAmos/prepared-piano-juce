@@ -2,6 +2,7 @@
 #include "SynthSound.h"
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_dsp/juce_dsp.h>
+#include "NoteParamStructures.h"
 
 
 class SynthVoice : public juce::SynthesiserVoice {
