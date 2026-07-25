@@ -3,6 +3,7 @@
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_dsp/juce_dsp.h>
 
+
 class SynthVoice : public juce::SynthesiserVoice {
     
 public:
@@ -23,11 +24,24 @@ public:
     
     void controllerMoved(int controllerNumber, int newValue) override;
     
+    bool isVoiceActive() const override{
+        
+        return ADSR.isActive() || ringingReverb ;
+    }
+    
     
 private:
     
+    //OSC and ADSR
     juce::dsp::Oscillator<float> OSC;
     juce::ADSR ADSR;
+    
+    
+    //Allowing the Reverb to tail off , RingingReverb states if the voice is currently ringing the reverb
+    bool ringingReverb;
+    
+    
+    
     
     
 };
