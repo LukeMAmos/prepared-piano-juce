@@ -45,3 +45,35 @@ private:
     double sampleRate;
     
 };
+
+//Uses the delay line function with wet/dry implementation
+class Delay{
+
+public:
+    
+    void prepare(double sampleRateIn , float maxDelayMs){
+        
+        delayLine.prepare(sampleRateIn, maxDelayMs);
+        
+    }
+    
+    void setParameters(float delayedSampleLevel , float delayInMs){
+        
+        delayLine.setDelayLine(delayInMs);
+        wetLevel = delayedSampleLevel;
+    }
+    
+    float process(float input){
+        
+        nextWetOut = delayLine.processSample(input);
+        
+        return ((nextWetOut * wetLevel) + (input * (1 - wetLevel)));
+    }
+
+
+private:
+    
+    float nextWetOut = 0.0f;
+    DelayLine delayLine;
+    float wetLevel;
+}
