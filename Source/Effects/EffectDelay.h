@@ -8,7 +8,7 @@ public:
         
         sampleRate = sampleRateIn;
         
-        int maxBufferSize = sampleRate * (maxDelayMs / 1000);
+        int maxBufferSize = sampleRate * (maxDelayMs / 1000.0f);
         buffer.resize(maxBufferSize, 0);
         writePosition = 0;
         
@@ -16,7 +16,7 @@ public:
 
     void setDelayLine(float ms){
         
-        delaySamples = std::min((int)(sampleRate * (ms / 1000.0f)), (int)buffer.size() - 1);
+        delaySamples = std::min((int)(sampleRate * (ms / 1000.0f)), (int)buffer.size() - 1.0f);
         
     }
 
@@ -27,7 +27,7 @@ public:
         float delayedSample = buffer[readPosition];
         
         buffer[writePosition] = input;
-        writePosition = (writePosition + 1 ) % buffer.size();
+        writePosition = (writePosition + 1.0f ) % buffer.size();
         
         return delayedSample;
     }
@@ -67,7 +67,7 @@ public:
         
         nextWetOut = delayLine.processSample(input);
         
-        return ((nextWetOut * wetLevel) + (input * (1 - wetLevel)));
+        return ((nextWetOut * wetLevel) + (input * (1.0f - wetLevel)));
     }
 
 

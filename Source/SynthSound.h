@@ -7,14 +7,13 @@ public:
     
     bool appliesToNote(int midiNoteNumber) override{
         
-        return true;
+        if(midiNoteNumber > -1) return true;
         
     }
     
     bool appliesToChannel(int midiChannel) override{
         
-        
-        return true;
+        if(midiChannel > -1) return true;
     }
     
 private:

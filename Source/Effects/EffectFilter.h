@@ -18,41 +18,41 @@ public:
     void setParameters(float cutoffFreqIn , float resonanceIn , FilterTypeBiquad filterTypeIn){
         
         filterType = filterTypeIn;
-        resonance = std::max(resonanceIn , (float)std::sqrt(0.5));
+        resonance = std::max(resonanceIn , (float)std::sqrt(0.5f));
         cutoffFrequency = juce::jlimit(0.0f , (sampleRate * 0.5f), cutoffFreqIn);
         
         theta = (( 2.0f * juce::MathConstants<float>::pi * cutoffFrequency ) / sampleRate);
         
         if(filterType == lowpass || filterType == highpass){
             b2 = (2.0f * resonance - sin(theta)) / (2.0f * resonance + sin(theta));
-            b1 = -(1 + b2) * cos(theta);
+            b1 = -(1.0f + b2) * cos(theta);
         }else if (filterType == bandpass || filterType == bandreject){
             
             b2 = tan((juce::MathConstants<float>::pi)/(4.0f)-(theta / (2.0f * resonance)));
-            b1 = -(1 + b2) * cos(theta);
+            b1 = -(1.0f + b2) * cos(theta);
         }
         switch (filterType) {
             case lowpass:
-                a0 = 0.25 * (1 + b1 + b2);
-                a1 = 2 * a0;
+                a0 = 0.25f * (1 + b1 + b2);
+                a1 = 2.0f * a0;
                 a2 = a0;
                 break;
                 
             case highpass:
-                a0 = 0.25 * (1 - b1 + b2);
-                a1 = -2 * a0;
+                a0 = 0.25f * (1.0f - b1 + b2);
+                a1 = -2.0f * a0;
                 a2 = a0;
                 break;
                 
             case bandpass:
-                a0 = 0.5 * (1-b2);
-                a1 = 0;
+                a0 = 0.5f * (1.0f-b2);
+                a1 = 0.0f;
                 a2 = -a0;
                 break;
                 
             case bandreject:
-                a0 = 0.5 * (1+b2);
-                a1 = 0;
+                a0 = 0.5f * (1.0f+b2);
+                a1 = 0.0f;
                 a2 = a0;
                 break;
             

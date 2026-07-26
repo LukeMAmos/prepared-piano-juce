@@ -9,7 +9,7 @@ class SynthVoice : public juce::SynthesiserVoice {
     
 public:
     
-    SynthVoice(std::array<NoteParams, 128>* paramsArray);
+    SynthVoice(std::array<NoteParams, 128>* ParamsArray);
     
     void prepare(const juce::dsp::ProcessSpec& spec);
     
