@@ -9,7 +9,7 @@ class SynthVoice : public juce::SynthesiserVoice {
     
 public:
     
-    SynthVoice();
+    SynthVoice(std::array<NoteParams, 128>* paramsArray);
     
     void prepare(const juce::dsp::ProcessSpec& spec);
     
@@ -30,6 +30,11 @@ public:
         return ADSR.isActive() || ringingReverb ;
     }
     
+    //Method for checking the level of the voice when it is currently reverberating , when the level drops below the threshhold we then release the voice
+    bool isSilent(){
+        
+        return {};
+    }
     
 private:
     
@@ -37,12 +42,15 @@ private:
     juce::dsp::Oscillator<float> OSC;
     juce::ADSR ADSR;
     
+    static constexpr float silenceThreshhold = -60.0f;
+    
+    std::array<NoteParams , 128 >* paramsArray;
     
     //Allowing the Reverb to tail off , RingingReverb states if the voice is currently ringing the reverb
     bool ringingReverb;
     
     
-    
+    //Voice Effects 
     
     
 };
