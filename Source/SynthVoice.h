@@ -46,8 +46,8 @@ private:
     
     std::array<NoteParams , 128 >* paramsArray;
     
-    //Allowing the Reverb to tail off , RingingReverb states if the voice is currently ringing the reverb
-    bool ringingReverb;
+    //Allowing the Reverb to tail off , tailPending states if the voice is currently ringing the reverb , and the adsr has moved into release stage 
+    bool tailPending;
     
     
     //Voice Effects 

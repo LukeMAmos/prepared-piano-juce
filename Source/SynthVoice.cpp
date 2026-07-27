@@ -2,6 +2,8 @@
 
 SynthVoice::SynthVoice(std::array<NoteParams, 128>* ParamsArray) : paramsArray(ParamsArray){}
 
+
+
 void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
     
 }
