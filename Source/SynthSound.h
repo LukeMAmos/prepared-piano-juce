@@ -9,7 +9,7 @@ public:
         
         if(midiNoteNumber > -1) return true;
         
-        return false
+        return false;
     }
     
     bool appliesToChannel(int midiChannel) override{

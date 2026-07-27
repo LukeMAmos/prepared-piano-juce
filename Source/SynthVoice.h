@@ -27,7 +27,7 @@ public:
     
     bool isVoiceActive() const override{
         
-        return ADSR.isActive() || ringingReverb ;
+        return ADSR.isActive() || tailPending;
     }
     
     //Method for checking the level of the voice when it is currently reverberating , when the level drops below the threshhold we then release the voice
@@ -36,17 +36,23 @@ public:
         return {};
     }
     
+    void updateValues(int midiNoteNumber);
+    
+    void updateOscillator();
+    
 private:
     
     //OSC and ADSR
     juce::dsp::Oscillator<float> OSC;
     juce::ADSR ADSR;
     
+    juce::AudioBuffer<float> privateBuffer;
+    
     static constexpr float silenceThreshhold = -60.0f;
     
     std::array<NoteParams , 128 >* paramsArray;
     
-    //Allowing the Reverb to tail off , tailPending states if the voice is currently ringing the reverb , and the adsr has moved into release stage 
+    //Allowing the Reverb to tail off , tailPending states if the voice is currently ringing the reverb , and the adsr has moved into release stage
     bool tailPending;
     
     
