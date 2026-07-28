@@ -6,7 +6,7 @@ SynthVoice::SynthVoice(std::array<NoteParams, 128>* ParamsArray) : paramsArray(P
 
 void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
     
-    currentSampleRate = spec.sampleRate;
+    setCurrentPlaybackSampleRate(spec.sampleRate);
     
 }
 
@@ -37,10 +37,12 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int st
     
 }
 
-void SynthVoice::pitchWheelMoved(int newValue){
-    curre
-}
+void SynthVoice::pitchWheelMoved(int){}
 
-void SynthVoice::controllerMoved(int controllerNumber, int newValue){
+void SynthVoice::controllerMoved(int, int){}
+
+void SynthVoice::updateValues(int midiNoteNumber){
+    
+    
     
 }

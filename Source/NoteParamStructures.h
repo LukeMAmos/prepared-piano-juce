@@ -16,10 +16,10 @@ enum FilterTypeBiquad{
 
 struct NoteParams{
     
-    float attack = 0.1f;
-    float decay = 0.1f;
-    float release = 0.1f;
-    float sustain = 1.0f;
+    std::atomic<float> attack = 0.1f;
+    std::atomic<float> decay = 0.1f;
+    std::atomic<float> release = 0.1f;
+    std::atomic<float> sustain = 1.0f;
     
     std::atomic<FilterTypeBiquad> filterType{FilterTypeBiquad::lowpass};
     std::atomic<float> filterResonance{0.5f};
