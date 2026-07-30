@@ -52,6 +52,13 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int st
     
     //Applying effects to the note 
     
+    
+    //After applying effects if we are in tail out phase of the note , then check if we have passed the threshold for killing the note
+    if(tailPending){
+        
+        isSilent(); //If isSilent is true then tail pending will be set to false which will allow the note to be released by the synth
+    }
+    
 }
 
 void SynthVoice::pitchWheelMoved(int){}

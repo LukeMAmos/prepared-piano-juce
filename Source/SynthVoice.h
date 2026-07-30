@@ -35,7 +35,16 @@ public:
     //Method for checking the level of the voice when it is currently reverberating , when the level drops below the threshhold we then release the voice
     bool isSilent(){
         
-        return {};
+        float leftDb = juce::Decibels::gainToDecibels(privateBuffer.getRMSLevel(0, 0, privateBuffer.getNumSamples()));
+        float rightDb = juce::Decibels::gainToDecibels(privateBuffer.getRMSLevel(1, 0, privateBuffer.getNumSamples()));
+        
+        if( leftDb < silenceThreshhold && rightDb < silenceThreshhold){
+            tailPending = false;
+            clearCurrentNote(); 
+            return true;
+        }
+        
+        return false;
     }
     
     void updateValues(int midiNoteNumber);
