@@ -18,7 +18,6 @@ void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
 }
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound){
-    
     return true;
 }
     
@@ -45,7 +44,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int st
     privateBuffer.clear();
     
     juce::dsp::AudioBlock<float> block(privateBuffer);
-    auto subBlock = block.getSubBlock(0, numSamples);
+    auto subBlock = block.getSubBlock(0, (size_t)numSamples);
     juce::dsp::ProcessContextReplacing<float> context(subBlock);
     
     OSC.process(context);

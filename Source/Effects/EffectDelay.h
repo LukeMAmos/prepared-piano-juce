@@ -1,5 +1,5 @@
-
-//Delay Line used individually as a delay function or used by other effects as a delay block 
+#pragma once
+//Delay Line used individually as a delay function or used by other effects as a delay block
 class DelayLine{
     
 public:
@@ -8,15 +8,15 @@ public:
         
         sampleRate = sampleRateIn;
         
-        int maxBufferSize = sampleRate * (maxDelayMs / 1000.0f);
-        buffer.resize(maxBufferSize, 0);
+        int maxBufferSize = (int)(sampleRate * (maxDelayMs / 1000.0f));
+        buffer.resize((size_t)maxBufferSize, 0);
         writePosition = 0;
         
     }
 
     void setDelayLine(float ms){
         
-        delaySamples = std::min((int)(sampleRate * (ms / 1000.0f)), (int)buffer.size() - 1.0f);
+        delaySamples = std::min((int)(sampleRate * (ms / 1000.0f)), (int)(buffer.size() - 1.0f));
         
     }
 
@@ -24,17 +24,17 @@ public:
         
         int readPosition = (int)(writePosition - delaySamples + buffer.size()) % buffer.size();
         
-        float delayedSample = buffer[readPosition];
+        float delayedSample = buffer[(size_t)readPosition];
         
-        buffer[writePosition] = input;
-        writePosition = (writePosition + 1.0f ) % buffer.size();
+        buffer[(size_t)writePosition] = input;
+        writePosition = (int)(writePosition + 1.0f ) % (int)buffer.size();
         
         return delayedSample;
     }
     
     float bufferValue(int samplePos){
         
-        return buffer[samplePos];
+        return buffer[(size_t)samplePos];
     }
     
 private:
@@ -76,6 +76,6 @@ private:
     float nextWetOut = 0.0f;
     DelayLine delayLine;
     float wetLevel;
-}
+};
 
 

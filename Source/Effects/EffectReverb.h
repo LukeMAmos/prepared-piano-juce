@@ -1,3 +1,4 @@
+#pragma once
 #include "EffectDelay.h"
 
 class CombFilter{
@@ -7,7 +8,7 @@ public:
     void prepare(double sampleRateIn ,float maxDelayMs){
         
         delayLine.prepare(sampleRateIn , maxDelayMs);
-        sampleRate = sampleRateIn;
+        sampleRate = (float)sampleRateIn;
         filterState = 0.0f;
     }
     
@@ -45,7 +46,7 @@ class AllPassFilter{
 public:
     
     void prepare(double sampleRateIn , float maxDelayMs){
-        int maxSamples = sampleRateIn * (maxDelayMs / 1000);
+        int maxSamples = (int)(sampleRateIn * (maxDelayMs / 1000.0f));
         
         inputBuffer.resize(maxSamples, 0.0f);
         outputBuffer.resize(maxSamples , 0.0f);

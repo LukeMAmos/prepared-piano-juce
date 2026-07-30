@@ -1,4 +1,5 @@
-#include "NoteParamStructures.h"
+#pragma once
+#include "../NoteParamStructures.h"
 
 
 //Biquad Filter implementation , allows for multiple filter types depending on the coefficiensts 
