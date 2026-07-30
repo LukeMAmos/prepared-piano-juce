@@ -96,7 +96,7 @@ private:
 };
 
 //Schroeder style reverb built from comb and all pass filters
-class Reverb{
+class SchroReverb{
     
 public:
     

@@ -59,6 +59,8 @@ private:
     bool tailPending;
     
     //Voice Effects, multichannel voice effects , each channel needs its own effect
-    
-    
+    MultichannelEffect<SoftDistortion> softDistortion;
+    MultichannelEffect<SchroReverb> reverb;
+    MultichannelEffect<BiquadFilter> filter;
+    MultichannelEffect<Delay> delay; 
 };

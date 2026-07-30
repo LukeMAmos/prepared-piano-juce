@@ -1,4 +1,8 @@
 //Implementation of multichannel versions of the Effects
+#include "EffectReverb.h"
+#include "EffectFilter.h"
+#include "EffectDistortion.h"
+#include "EffectDelay.h"
 
 template<typename EffectType>
 class MultichannelEffect{
