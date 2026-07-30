@@ -8,6 +8,15 @@ void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
     
     setCurrentPlaybackSampleRate(spec.sampleRate);
     
+    OSC.prepare(spec);
+    OSC.initialise([](float x) {return x < 0.0f ? -1.0f : 1.0f;}); //Initalised as a square wave , implementing OSC switching for individual voicing
+    
+    ADSR.setSampleRate(spec.sampleRate);
+    
+    //For the number of channels we need a version of the effect for each of the channels
+    
+    privateBuffer.setSize((int)spec.numChannels , (int)spec.maximumBlockSize);
+    privateBuffer.clear();
 }
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound){
@@ -43,6 +52,6 @@ void SynthVoice::controllerMoved(int, int){}
 
 void SynthVoice::updateValues(int midiNoteNumber){
     
-    
+    auto& data = paramsArray->at((size_t)midiNoteNumber);
     
 }

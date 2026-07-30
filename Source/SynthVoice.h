@@ -45,6 +45,7 @@ private:
     //OSC and ADSR
     juce::dsp::Oscillator<float> OSC;
     juce::ADSR ADSR;
+    juce::ADSR::Parameters adsrParams; 
     
     juce::AudioBuffer<float> privateBuffer;
     
