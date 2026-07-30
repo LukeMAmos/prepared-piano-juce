@@ -3,7 +3,10 @@
 
 PreparedSynthAudioProcessor::PreparedSynthAudioProcessor() : AudioProcessor(BusesProperties().withOutput("Output" , juce::AudioChannelSet::stereo() , true ))
 {
+    for(int i = 0; i < numVoices ; i++)
+        synth.addVoice(new SynthVoice(&paramsArray));
     
+    synth.addSound(new SynthSound());
 }
 
 PreparedSynthAudioProcessor::~PreparedSynthAudioProcessor()
@@ -25,6 +28,20 @@ double PreparedSynthAudioProcessor::getTailLengthSeconds() const {
 
 void PreparedSynthAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock){
     
+    juce::dsp::ProcessSpec processSpec;
+    processSpec.sampleRate = sampleRate;
+    processSpec.numChannels = 2;
+    processSpec.maximumBlockSize = (uint32)samplesPerBlock;
+    
+    synth.setCurrentPlaybackSampleRate(sampleRate);
+    
+    for(int i = 0; i < numVoices ; i++){
+        
+        auto voice = static_cast<SynthVoice*>(synth.getVoice(i));
+        
+        if(voice != nullptr)
+            voice->prepare(processSpec);
+    }
     
     
 }

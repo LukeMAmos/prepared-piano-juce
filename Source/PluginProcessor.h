@@ -1,6 +1,7 @@
 #pragma once
 #include <JuceHeader.h>
 #include "SynthVoice.h"
+#include "NoteParamStructures.h"
 
 class PreparedSynthAudioProcessor : public juce::AudioProcessor
 {
@@ -44,7 +45,11 @@ public:
     
 private:
     
-    juce::Synthesiser synth; 
+    juce::Synthesiser synth;
+    const int numVoices = 16; 
+    //Structure to hold data for all the notes
+    std::array<NoteParams , 128> paramsArray;
+    
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PreparedSynthAudioProcessor)
 };
