@@ -1,12 +1,10 @@
 #include "SynthVoice.h"
 
-SynthVoice::SynthVoice(std::array<NoteParams, 128>* ParamsArray) : paramsArray(ParamsArray){}
+SynthVoice::SynthVoice(std::array<NoteParams, 12>* ParamsArray) : paramsArray(ParamsArray){}
 
 
 
 void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
-    
-    setCurrentPlaybackSampleRate(spec.sampleRate);
     
     OSC.prepare(spec);
     OSC.initialise([](float x) {return x < 0.0f ? -1.0f : 1.0f;}); //Initalised as a square wave , implementing OSC switching for individual voicing
@@ -27,7 +25,8 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound){
 void SynthVoice::startNote(int midiNoteNumber , float velocity , juce::SynthesiserSound* sound , int currentPitchWheelPosition){
     
     //Update values to be used , start the adsr
-    updateValues(midiNoteNumber);
+    noteParamPosition = midiNoteNumber % 12;
+    updateValues(noteParamPosition);
     OSC.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
     ADSR.noteOn();
 }
@@ -62,6 +61,6 @@ void SynthVoice::controllerMoved(int, int){}
 
 void SynthVoice::updateValues(int midiNoteNumber){
     
-    auto& data = paramsArray->at((size_t)midiNoteNumber);
+    auto& data = paramsArray->at((size_t)(midiNoteNumber));
     
 }

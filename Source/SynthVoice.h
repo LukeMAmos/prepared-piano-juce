@@ -11,7 +11,7 @@ class SynthVoice : public juce::SynthesiserVoice {
     
 public:
     
-    SynthVoice(std::array<NoteParams, 128>* ParamsArray);
+    SynthVoice(std::array<NoteParams, 12>* ParamsArray);
     
     void prepare(const juce::dsp::ProcessSpec& spec);
     
@@ -48,12 +48,12 @@ private:
     juce::dsp::Oscillator<float> OSC;
     juce::ADSR ADSR;
     juce::ADSR::Parameters adsrParams; 
-    
+    int noteParamPosition = 0; 
     juce::AudioBuffer<float> privateBuffer;
     
     static constexpr float silenceThreshhold = -60.0f;
     
-    std::array<NoteParams , 128 >* paramsArray;
+    std::array<NoteParams , 12>* paramsArray;
     
     //Allowing the Reverb to tail off , tailPending states if the voice is currently ringing the reverb , and the adsr has moved into release stage
     bool tailPending;

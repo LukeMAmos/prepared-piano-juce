@@ -48,7 +48,7 @@ private:
     juce::Synthesiser synth;
     const int numVoices = 16; 
     //Structure to hold data for all the notes
-    std::array<NoteParams , 128> paramsArray;
+    std::array<NoteParams , 12> paramsArray;
     
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PreparedSynthAudioProcessor)
