@@ -43,6 +43,16 @@ void SynthVoice::stopNote(float  , bool ){
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int startSample , int numSamples){
     
     juce::ScopedNoDenormals noDenormals;
+    privateBuffer.clear();
+    
+    juce::dsp::AudioBlock<float> block(privateBuffer);
+    auto subBlock = block.getSubBlock(0, numSamples);
+    juce::dsp::ProcessContextReplacing<float> context(subBlock);
+    
+    OSC.process(context);
+    ADSR.applyEnvelopeToBuffer(privateBuffer, 0, numSamples);
+    
+    //Applying effects to the note 
     
 }
 

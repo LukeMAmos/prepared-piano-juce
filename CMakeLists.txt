@@ -42,7 +42,7 @@ target_sources(PreparedSynth
         Source/Effects/EffectDelay.h 
         Source/Effects/EffectReverb.h
         Source/Effects/EffectDistortion.h
-
+        Source/Effects/MultichannelEffects.h
 )
 
 source_group("Source" FILES
@@ -61,6 +61,7 @@ source_group("Source\\Effects" FILES
     Source/Effects/EffectDelay.h
     Source/Effects/EffectReverb.h
     Source/Effects/EffectDistortion.h
+    Source/Effects/MultichannelEffects.h
 )
 
 target_compile_definitions(PreparedSynth

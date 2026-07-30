@@ -56,8 +56,7 @@ private:
     //Allowing the Reverb to tail off , tailPending states if the voice is currently ringing the reverb , and the adsr has moved into release stage
     bool tailPending;
     
-    
-    //Voice Effects 
+    //Voice Effects, multichannel voice effects , each channel needs its own effect
     
     
 };
