@@ -8,7 +8,7 @@ public:
     template<typename... Args>
     void prepare(int numChannels , Args&&... args){
         
-        effects.resize(nChannels);
+        effects.resize(numChannels);
         
         for(auto& effect : effects)
             effect.prepare(std::forward<Args>(args)...);
