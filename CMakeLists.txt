@@ -43,6 +43,8 @@ target_sources(PreparedSynth
         Source/Effects/EffectReverb.h
         Source/Effects/EffectDistortion.h
         Source/Effects/MultichannelEffects.h
+        Source/UI/SliderDesign.h
+        Source/UI/MenuDesign.h
 )
 
 source_group("Source" FILES
@@ -62,6 +64,12 @@ source_group("Source\\Effects" FILES
     Source/Effects/EffectReverb.h
     Source/Effects/EffectDistortion.h
     Source/Effects/MultichannelEffects.h
+)
+
+source_group("Source\\UI" FILES 
+    Source/UI/SliderDesign.h
+    Source/UI/MenuDesign.h
+
 )
 
 target_compile_definitions(PreparedSynth
