@@ -30,7 +30,7 @@ juce_generate_juce_header(PreparedSynth)
 
 target_sources(PreparedSynth
     PRIVATE
-		Source/PluginProcessor.cpp
+	Source/PluginProcessor.cpp
         Source/PluginProcessor.h
         Source/PluginEditor.cpp
         Source/PluginEditor.h
@@ -45,6 +45,8 @@ target_sources(PreparedSynth
         Source/Effects/MultichannelEffects.h
         Source/UI/SliderDesign.h
         Source/UI/MenuDesign.h
+    	Source/UI/SliderDesign.cpp
+    	Source/UI/MenuDesign.cpp
 )
 
 source_group("Source" FILES
@@ -69,6 +71,8 @@ source_group("Source\\Effects" FILES
 source_group("Source\\UI" FILES 
     Source/UI/SliderDesign.h
     Source/UI/MenuDesign.h
+    Source/UI/SliderDesign.cpp
+    Source/UI/MenuDesign.cpp
 
 )
 

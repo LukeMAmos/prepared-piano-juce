@@ -3,6 +3,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "UI/MenuDesign.h"
 
 //==============================================================================
 /**
