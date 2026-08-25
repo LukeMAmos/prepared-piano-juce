@@ -3,6 +3,7 @@
 #include "SynthVoice.h"
 #include "NoteParamStructures.h"
 
+#define numMidiNotes 12
 class PreparedSynthAudioProcessor : public juce::AudioProcessor
 {
     
@@ -43,12 +44,50 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     //==============================================================================
     
+    NoteParams& getNoteParams(int noteNumber){
+        
+        //every type of note shares the same paramter so only 12 notes are saved
+        noteNumber = noteNumber % 12; 
+        return paramsArray[(size_t)noteNumber];
+    }
+    
+    
+    //Changing the stored data values for all 128 notes to the currently selected note value
+    void updateAll(int currentPos){
+        
+        //Update all paramters to the current note selected
+        for(decltype(paramsArray.size()) i = 0 ; i < paramsArray.size() ; i++){
+
+            paramsArray[i].attack.store(paramsArray[(size_t)currentPos].attack.load());
+            paramsArray[i].decay.store(paramsArray[(size_t)currentPos].decay.load());
+            paramsArray[i].release.store(paramsArray[(size_t)currentPos].release.load());
+            paramsArray[i].sustain.store(paramsArray[(size_t)currentPos].sustain.load());
+            
+            paramsArray[i].filterType.store(paramsArray[(size_t)currentPos].filterType.load());
+            paramsArray[i].filterResonance.store(paramsArray[(size_t)currentPos].filterResonance.load());
+            paramsArray[i].cutoffFrequency.store(paramsArray[(size_t)currentPos].cutoffFrequency.load());
+            
+            paramsArray[i].coe.store(paramsArray[(size_t)currentPos].coe.load());
+            paramsArray[i].roomSize.store(paramsArray[(size_t)currentPos].roomSize.load());
+            paramsArray[i].wetLevel.store(paramsArray[(size_t)currentPos].wetLevel.load());
+            
+            paramsArray[i].inputDistortion.store(paramsArray[(size_t)currentPos].inputDistortion.load());
+            paramsArray[i].outputDistortion.store(paramsArray[(size_t)currentPos].outputDistortion.load());
+            
+            paramsArray[i].oscType.store(paramsArray[(size_t)currentPos].oscType.load());
+        }
+        
+    }
+    
+    juce::MidiKeyboardState keyboardState;
+    
 private:
     
     juce::Synthesiser synth;
-    const int numVoices = 16; 
+    const int numVoices = 16;
+    
     //Structure to hold data for all the notes
-    std::array<NoteParams , 12> paramsArray;
+    std::array<NoteParams , numMidiNotes> paramsArray;
     
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PreparedSynthAudioProcessor)

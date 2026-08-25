@@ -59,6 +59,8 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int st
         isSilent(); //If isSilent is true then tail pending will be set to false which will allow the note to be released by the synth
     }
     
+    for (int ch = 0; ch < outputBuffer.getNumChannels(); ++ch)
+        outputBuffer.addFrom(ch, startSample, privateBuffer, ch, 0, numSamples);
 }
 
 void SynthVoice::pitchWheelMoved(int){}

@@ -59,7 +59,14 @@ bool PreparedSynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& lay
 
 void PreparedSynthAudioProcessor::processBlock(juce::AudioBuffer<float> & buffer , juce::MidiBuffer & midiMessages){
     
+    juce::ScopedNoDenormals noDenormals;
+    auto totalNumInputChannels  = getTotalNumInputChannels();
+    auto totalNumOutputChannels = getTotalNumOutputChannels();
+    
     //Process Audio
+    keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
+    //Pass the the midi messages through into the synth
+    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     
 }
 
