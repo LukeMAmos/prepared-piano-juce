@@ -47,6 +47,7 @@ target_sources(PreparedSynth
         Source/UI/MenuDesign.h
     	Source/UI/SliderDesign.cpp
     	Source/UI/MenuDesign.cpp
+    	Source/UI/GridPatterns.h
 )
 
 source_group("Source" FILES
@@ -68,7 +69,8 @@ source_group("Source\\Effects" FILES
     Source/Effects/MultichannelEffects.h
 )
 
-source_group("Source\\UI" FILES 
+source_group("Source\\UI" FILES
+    Source/UI/GridPatterns.h
     Source/UI/SliderDesign.h
     Source/UI/MenuDesign.h
     Source/UI/SliderDesign.cpp
