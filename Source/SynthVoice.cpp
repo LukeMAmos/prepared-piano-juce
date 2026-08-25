@@ -50,7 +50,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int st
     OSC.process(context);
     ADSR.applyEnvelopeToBuffer(privateBuffer, 0, numSamples);
     
-    //Applying effects to the note 
+    //Applying effects to the note after the oscillator and the adsr are applied, using multichannel effects 
     
     
     //After applying effects if we are in tail out phase of the note , then check if we have passed the threshold for killing the note
