@@ -5,12 +5,15 @@ namespace NoteParamSerial {
 
 std::unique_ptr<juce::XmlElement> createStateXml(const std::array<NoteParams, numMidiNotes>& params){
     
+    //Create a new XML root
     auto root = std::make_unique<juce::XmlElement>("PARAMS");
     
     for(size_t i = 0 ; i < params.size() ; i++){
         
+        //Child element of the root
         auto* noteElement = root->createNewChildElement("NOTE");
         
+        //Fill the element with the data
         noteElement->setAttribute("index", static_cast<int>(i));
         
         noteElement->setAttribute("attack",params[i].attack.load());
@@ -41,6 +44,7 @@ std::unique_ptr<juce::XmlElement> createStateXml(const std::array<NoteParams, nu
 
 void restoreStateFromXml(const juce::XmlElement& xml, std::array<NoteParams, numMidiNotes>& params){
     
+    //Opposite of createStateXML, get the data from XML and store in the correct location 
     for(auto* noteElement : xml.getChildWithTagNameIterator("NOTE")){
         
         size_t i= static_cast<size_t>(noteElement->getIntAttribute("index"));

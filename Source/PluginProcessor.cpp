@@ -99,13 +99,18 @@ void PreparedSynthAudioProcessor::changeProgramName (int, const juce::String&){
 //Storing and loading data 
 void PreparedSynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData){
     
-    
+    auto xml = NoteParamSerial::createStateXml(paramsArray);
+    copyXmlToBinary(*xml, destData);
     
 }
 
 void PreparedSynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes){
     
-    
+    auto xml = getXmlFromBinary(data, sizeInBytes);
+    if(xml != nullptr){
+        NoteParamSerial::restoreStateFromXml(xml, paramsArray); 
+        
+    }
     
 }
 
