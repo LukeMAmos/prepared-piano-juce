@@ -5,14 +5,14 @@ using GridPattern = std::array<std::array<bool , 6> , 3>;
 
 
 //Sine Pattern
-inline GridPattern sinePattern = {{
+inline const GridPattern sinePattern = {{
         { false, true, true, false, false, false },
         { true, false, false, true, false, false },
         { false, false, false, false, true, true }
 }};
 
 //Square
-inline GridPattern squarePattern = {{
+inline const GridPattern squarePattern = {{
         { true, true, true, false, true, true },
         { true, false, true, false, true, false },
         { true, false, true, true, true, false }
@@ -20,7 +20,7 @@ inline GridPattern squarePattern = {{
 
 
 //Triangle
-inline GridPattern trianglePattern = {{
+inline const GridPattern trianglePattern = {{
         { false, false, true, false, false, false },
         { false, true, false, true, false, true },
         { true, false, false, false, true, false }
@@ -31,7 +31,7 @@ inline GridPattern trianglePattern = {{
 //Patterns for filter
 
 //lowpass
-inline GridPattern lowpassPattern = {{
+inline const GridPattern lowpassPattern = {{
         { false, false, true, true, true, true },
         { false, true, false, false, false, false },
         { true, false, false, false, false, false }
@@ -39,7 +39,7 @@ inline GridPattern lowpassPattern = {{
 
 
 //highpass
-inline GridPattern highpassPattern = {{
+inline const GridPattern highpassPattern = {{
         { true, true, true, true, false, false },
         { false, false, false, false, true, false },
         { false, false, false, false, false, true }
@@ -47,7 +47,7 @@ inline GridPattern highpassPattern = {{
 
 
 //bandpass
-inline GridPattern bandpassPattern = {{
+inline const GridPattern bandpassPattern = {{
         { false, false, true, true, false, false },
         { false, true, false, false, true, false },
         { true, false, false, false, false, true }
@@ -55,7 +55,7 @@ inline GridPattern bandpassPattern = {{
 
 
 //bandreject
-inline GridPattern bandrejectPattern = {{
+inline const GridPattern bandrejectPattern = {{
         { true, false, false, false, false, true },
         { false, true, false, false, true, false },
         { false, false, true, true, false, false }
