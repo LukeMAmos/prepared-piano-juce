@@ -4,14 +4,18 @@
 GridIconMenu::GridIconMenu(){
     
     //initaliser
-    
+    setLookAndFeel(this);
 
 }
-
+GridIconMenu::~GridIconMenu(){
+    
+    setLookAndFeel(nullptr); 
+    
+}
 void GridIconMenu::paint(juce::Graphics &g){
     
     //Draw evenly spaced circles based on the reduced bounds of the component and set the fill of the circle based on the current pattern being used
-    auto bounds = getBounds().reduced(5);
+    auto bounds = getLocalBounds().reduced(5);
     
     //Get number of rows and columns
     size_t nRows = currentPattern.size();
@@ -27,7 +31,7 @@ void GridIconMenu::paint(juce::Graphics &g){
     //loop through the rows and columns at each point check whether to fill or no fill and then draw
     for(size_t r = 0; r < nRows ; r++ ){
         
-        for(size_t c = 0; c < nRows ; c++){
+        for(size_t c = 0; c < nColumns ; c++){
             
             //get the next position using rectangle bounding box
             juce::Rectangle<float> area;
@@ -57,7 +61,7 @@ void GridIconMenu::mouseDown(const juce::MouseEvent &){
     int numItems = getNumItems();
     int currentIndex = getSelectedItemIndex();
     //loop around the number of elements
-    int nextIndex = currentIndex+1 % numItems;
+    int nextIndex = (currentIndex+1) % numItems;
     //set the new selected Index
     setSelectedItemIndex(nextIndex);
     
@@ -68,4 +72,16 @@ void GridIconMenu::mouseDown(const juce::MouseEvent &){
 void GridIconMenu::setGridPatterns(std::vector<GridPattern> patterns){
     //take the patterns and store them inside our vector for use when drawing the grid circles
     storedPatterns = std::move(patterns);
+}
+
+
+void GridIconMenu::drawComboBox(juce::Graphics&, int, int, bool, int, int, int, int, juce::ComboBox&){
+    
+    //Null
+}
+
+void GridIconMenu::positionComboBoxText(juce::ComboBox&, juce::Label& labelToPosition){
+    
+    labelToPosition.setVisible(false); 
+    
 }

@@ -12,6 +12,10 @@ void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
     ADSR.setSampleRate(spec.sampleRate);
     
     //For the number of channels we need a version of the effect for each of the channels
+    softDistortion.prepare((int)spec.numChannels, spec.sampleRate);
+    reverb.prepare((int)spec.numChannels,spec.sampleRate,315.0f);
+    filter.prepare((int)spec.numChannels, spec.sampleRate);
+    delay.prepare((int)spec.numChannels,spec.sampleRate ,10.0f);
     
     privateBuffer.setSize((int)spec.numChannels , (int)spec.maximumBlockSize);
     privateBuffer.clear();
@@ -54,7 +58,9 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int st
     for(int ch = 0 ; ch < outputBuffer.getNumChannels() ; ch++){
         
         for(int s = 0 ; s < numSamples ; s++){
-            float sample = softDistortion.process(ch, sample);
+            
+            float sample = privateBuffer.getSample(ch, s);
+            sample = softDistortion.process(ch, sample);
             sample = reverb.process(ch, sample);
             sample = filter.process(ch, sample);
             sample = delay.process(ch, sample);
@@ -79,6 +85,55 @@ void SynthVoice::controllerMoved(int, int){}
 
 void SynthVoice::updateValues(int midiNoteNumber){
     
-    auto& data = paramsArray->at((size_t)(midiNoteNumber));
+    juce::ADSR::Parameters adsrParams;
+    
+    auto& data = paramsArray->at(midiNoteNumber); //getting the data at the specific midi note , then using that data to control the effects/ parameters of that voice
+    adsrParams.attack  = data.attack;
+    adsrParams.decay   = data.decay;
+    adsrParams.sustain = data.sustain;
+    adsrParams.release = data.release;
+    ADSR.setParameters(adsrParams);
+    
+    float coe = data.coe.load();
+    float roomSize = data.roomSize.load();
+    float wetAm = data.wetLevel.load();
+
+    float cutoff = data.cutoffFrequency.load();
+    float resonance = data.filterResonance.load();
+    auto type = data.filterType.load();
+    
+    float inGainDis = data.inputDistortion.load();
+    float outGainDis = data.outputDistortion.load();
+    softDistortion.setParameters(inGainDis, outGainDis);
+    
+    float delayedSampleLevel = data.delayedSampleLevel.load();
+    float delayInMS = data.delayMs.load();
+
+    reverb.setParameters(coe,2500.0f, roomSize, wetAm);
+        
+    filter.setParameters(cutoff, resonance, type);
+        
+    delay.setParameters(delayedSampleLevel, delayInMS);
+    
+    updateOscillator(data.oscType); 
+    
+}
+
+void SynthVoice::updateOscillator(OSCType type){
+    
+    switch (type) {
+        case Sine:
+            OSC.initialise([](float x){return std::sin(x * 2 * M_PI);}); // type mismatch here
+            break;
+        case Square:
+            OSC.initialise([](float x){return x < 0.0f ? -1.0f : 1.0f;});
+            break;
+        case Triangle:
+            OSC.initialise([](float x){return x < 0.5f ? x * 4 - 1 : -x * 4 + 3 ;});
+            break;
+        default:
+            break;
+    }
+    
     
 }

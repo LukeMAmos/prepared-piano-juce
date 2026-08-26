@@ -3,7 +3,10 @@ class SoftDistortion{
     
 public:
     
-    void prepare(double sampleRateIn);
+    void prepare(double sampleRateIn){
+        
+        sampleRate = sampleRateIn;
+    }
     
     void setParameters(float inputGainIn , float outputGainIn){
         
@@ -32,6 +35,7 @@ public:
 
 private:
     
+    float sampleRate;
     float inputGain;
     float outputGain;
     

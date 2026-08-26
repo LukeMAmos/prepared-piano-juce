@@ -49,7 +49,7 @@ public:
     
     void updateValues(int midiNoteNumber);
     
-    void updateOscillator();
+    void updateOscillator(OSCType type);
     
 private:
     
