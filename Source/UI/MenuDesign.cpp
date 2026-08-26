@@ -21,7 +21,7 @@ void GridIconMenu::paint(juce::Graphics &g){
     auto rSpacing = (float)bounds.getHeight() / nRows ;
     auto cSpacing = (float)bounds.getWidth() / nColumns;
     
-    float circleSize = std::min(rSpacing , cSpacing) * 0.8;
+    float circleSize = (float)(std::min(rSpacing , cSpacing) * 0.8);
     float lineThickness = 2.0f;
     
     //loop through the rows and columns at each point check whether to fill or no fill and then draw
@@ -46,8 +46,6 @@ void GridIconMenu::paint(juce::Graphics &g){
                 g.drawEllipse(area, lineThickness);
                 
             }
-            
-            
         }
     }
     

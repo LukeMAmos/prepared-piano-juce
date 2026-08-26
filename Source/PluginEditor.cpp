@@ -28,6 +28,9 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     oscType.addItem("Sine", 1);
     oscType.addItem("Square", 2 );
     oscType.addItem("Triangle", 3);
+    //Load in the grid patterns
+    std::vector<GridPattern> patterns = {sinePattern , squarePattern , trianglePattern};
+    oscType.setGridPatterns(patterns);
     oscType.onChange = [this](){
         audioProcessor.getNoteParams(currentMidiNote).oscType.store((OSCType)(oscType.getSelectedId() - 1));
     };

@@ -108,7 +108,7 @@ void PreparedSynthAudioProcessor::setStateInformation (const void* data, int siz
     
     auto xml = getXmlFromBinary(data, sizeInBytes);
     if(xml != nullptr){
-        NoteParamSerial::restoreStateFromXml(xml, paramsArray); 
+        NoteParamSerial::restoreStateFromXml(*xml, paramsArray); 
         
     }
     

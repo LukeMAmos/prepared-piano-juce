@@ -4,6 +4,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "UI/MenuDesign.h"
+#include "UI/GridPatterns.h"
 
 //==============================================================================
 /**
@@ -57,7 +58,7 @@ private:
     juce::Slider delayWetLevel;
     juce::Slider delayMs;
     
-    juce::ComboBox oscType;
+    GridIconMenu oscType;
     
     
     //Grouping dials for UI

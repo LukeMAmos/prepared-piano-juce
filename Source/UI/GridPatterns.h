@@ -3,15 +3,16 @@ using GridPattern = std::array<std::array<bool , 6> , 3>;
 //==============================================================================
 //Patterns for OSC
 
+
 //Sine Pattern
-GridPattern sinePattern = {{
+inline GridPattern sinePattern = {{
         { false, true, true, false, false, false },
         { true, false, false, true, false, false },
         { false, false, false, false, true, true }
 }};
 
 //Square
-GridPattern squarePattern = {{
+inline GridPattern squarePattern = {{
         { true, true, true, false, true, true },
         { true, false, true, false, true, false },
         { true, false, true, true, true, false }
@@ -19,7 +20,7 @@ GridPattern squarePattern = {{
 
 
 //Triangle
-GridPattern trianglePattern = {{
+inline GridPattern trianglePattern = {{
         { false, false, true, false, false, false },
         { false, true, false, true, false, true },
         { true, false, false, false, true, false }
@@ -30,7 +31,7 @@ GridPattern trianglePattern = {{
 //Patterns for filter
 
 //lowpass
-GridPattern lowpassPattern = {{
+inline GridPattern lowpassPattern = {{
         { false, false, true, true, true, true },
         { false, true, false, false, false, false },
         { true, false, false, false, false, false }
@@ -38,7 +39,7 @@ GridPattern lowpassPattern = {{
 
 
 //highpass
-GridPattern highpassPattern = {{
+inline GridPattern highpassPattern = {{
         { true, true, true, true, false, false },
         { false, false, false, false, true, false },
         { false, false, false, false, false, true }
@@ -46,7 +47,7 @@ GridPattern highpassPattern = {{
 
 
 //bandpass
-GridPattern bandpassPattern = {{
+inline GridPattern bandpassPattern = {{
         { false, false, true, true, false, false },
         { false, true, false, false, true, false },
         { true, false, false, false, false, true }
@@ -54,7 +55,7 @@ GridPattern bandpassPattern = {{
 
 
 //bandreject
-GridPattern bandrejectPattern = {{
+inline GridPattern bandrejectPattern = {{
         { true, false, false, false, false, true },
         { false, true, false, false, true, false },
         { false, false, true, true, false, false }
