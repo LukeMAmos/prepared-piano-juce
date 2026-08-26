@@ -18,19 +18,32 @@ void GridIconMenu::paint(juce::Graphics &g){
     size_t nColumns = currentPattern[0].size();
     
     //Get the spacing for drawing the circles
-    auto rSpacing = bounds.getHeight() / nColumns ;
-    auto nSpacing = bounds.getWidth() / nRows;
+    auto rSpacing = (float)bounds.getHeight() / nRows ;
+    auto cSpacing = (float)bounds.getWidth() / nColumns;
+    
+    float circleSize = std::min(rSpacing , cSpacing) * 0.8;
+    float lineThickness = 2.0f;
     
     //loop through the rows and columns at each point check whether to fill or no fill and then draw
     for(size_t r = 0; r < nRows ; r++ ){
         
         for(size_t c = 0; c < nRows ; c++){
             
+            //get the next position using rectangle bounding box
+            juce::Rectangle<float> area;
+            float centreX = bounds.getX() + (c * cSpacing) + (cSpacing / 2.0f);
+            float centreY = bounds.getY() + (r * rSpacing) + (rSpacing / 2.0f);
+            area.setCentre(centreX, centreY);
+            area.setSize(circleSize, circleSize);
+            
+            //conditional drawing 
             if(currentPattern[r][c]){
                 //current position is on and should be drawn with fill
+                g.fillEllipse(area);
                 
             }else{
                 //current position is off state and should be drawn with no fill 
+                g.drawEllipse(area, lineThickness);
                 
             }
             

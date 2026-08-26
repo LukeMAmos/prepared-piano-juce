@@ -96,6 +96,7 @@ void PreparedSynthAudioProcessor::changeProgramName (int, const juce::String&){
 
 
 
+//Storing and loading data 
 void PreparedSynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData){
     
     

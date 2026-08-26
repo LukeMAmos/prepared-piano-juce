@@ -38,6 +38,7 @@ target_sources(PreparedSynth
         Source/SynthVoice.h
         Source/SynthVoice.cpp
         Source/NoteParamStructures.h
+	Source/NoteParamStructures.cpp
         Source/Effects/EffectFilter.h 
         Source/Effects/EffectDelay.h 
         Source/Effects/EffectReverb.h
@@ -59,6 +60,7 @@ source_group("Source" FILES
     Source/SynthVoice.h
     Source/SynthVoice.cpp
     Source/NoteParamStructures.h
+    Source/NoteParamStructures.cpp
 )
 
 source_group("Source\\Effects" FILES 
