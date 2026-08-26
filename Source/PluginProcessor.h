@@ -3,7 +3,7 @@
 #include "SynthVoice.h"
 #include "NoteParamStructures.h"
 
-#define numMidiNotes 12
+
 class PreparedSynthAudioProcessor : public juce::AudioProcessor
 {
     

@@ -1,4 +1,7 @@
 #pragma once
+#include <juce_core/juce_core.h>
+
+#define numMidiNotes 12
 
 enum OSCType{
 
@@ -39,3 +42,11 @@ struct NoteParams{
     std::atomic<float> delayMs{1.0f};
     
 };
+
+//Namespace to hold the functiosn for creating the Xml and restoring the state of the 
+namespace NoteParamSerial {
+
+    std::unique_ptr<juce::XmlElement> createStaticXml(const std::array<NoteParams, numMidiNotes>& params);
+    void restoreStateFromXml(const juce::XmlElement& xml, std::array<NoteParams, numMidiNotes>& params);
+
+}
