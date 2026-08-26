@@ -100,6 +100,7 @@ void PreparedSynthAudioProcessor::changeProgramName (int, const juce::String&){
 void PreparedSynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData){
     
     
+    
 }
 
 void PreparedSynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes){

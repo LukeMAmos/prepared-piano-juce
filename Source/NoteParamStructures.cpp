@@ -3,7 +3,7 @@
 
 namespace NoteParamSerial {
 
-std::unique_ptr<juce::XmlElement> createStaticXml(const std::array<NoteParams, numMidiNotes>& params){
+std::unique_ptr<juce::XmlElement> createStateXml(const std::array<NoteParams, numMidiNotes>& params){
     
     auto root = std::make_unique<juce::XmlElement>("PARAMS");
     

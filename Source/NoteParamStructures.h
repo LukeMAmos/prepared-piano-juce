@@ -46,7 +46,7 @@ struct NoteParams{
 //Namespace to hold the functiosn for creating the Xml and restoring the state of the 
 namespace NoteParamSerial {
 
-    std::unique_ptr<juce::XmlElement> createStaticXml(const std::array<NoteParams, numMidiNotes>& params);
+    std::unique_ptr<juce::XmlElement> createStateXml(const std::array<NoteParams, numMidiNotes>& params);
     void restoreStateFromXml(const juce::XmlElement& xml, std::array<NoteParams, numMidiNotes>& params);
 
 }
