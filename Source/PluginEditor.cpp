@@ -77,6 +77,8 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     filterType.addItem("Highpass", 2);
     filterType.addItem("Bandpass", 3);
     filterType.addItem("Bandreject", 4);
+    std::vector<GridPattern> fPatterns = {lowpassPattern , highpassPattern , bandpassPattern , bandrejectPattern};
+    filterType.setGridPatterns(fPatterns);
     filterType.onChange = [this](){
         audioProcessor.getNoteParams(currentMidiNote).filterType.store((FilterTypeBiquad)(filterType.getSelectedId() - 1));
     };

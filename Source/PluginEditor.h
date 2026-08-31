@@ -44,7 +44,7 @@ private:
     juce::Slider release ;
     juce::Slider sustain ;
     
-    juce::ComboBox filterType; //0 = none , 1 = lowpass, 2 = highpass
+    GridIconMenu filterType; //0 = none , 1 = lowpass, 2 = highpass
     juce::Slider filterResonance;
     juce::Slider cutoffFrequency;
     
