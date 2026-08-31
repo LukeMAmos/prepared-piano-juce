@@ -3,7 +3,7 @@
 dottedRotarySlider::dottedRotarySlider(){
     
     setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    setRotaryParameters(3.05f, 2.36f, true);
+    setRotaryParameters(juce::MathConstants<float>::pi * 1.2f, juce::MathConstants<float>::pi * 2.8f, true);
     
 }
 

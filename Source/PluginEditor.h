@@ -5,6 +5,7 @@
 #include "PluginProcessor.h"
 #include "UI/MenuDesign.h"
 #include "UI/GridPatterns.h"
+#include "UI/SliderDesign.h"
 
 //==============================================================================
 /**
@@ -39,7 +40,7 @@ private:
     juce::TextButton setAll{"Set All"};
     
     //Dials to control the values
-    juce::Slider attack;
+    dottedRotarySlider attack;
     juce::Slider decay ;
     juce::Slider release ;
     juce::Slider sustain ;
