@@ -7,7 +7,7 @@
 
 using GridPattern = std::array<std::array<bool , 6> , 3>;
 
-class GridIconMenu : public juce::ComboBox, public juce::LookAndFeel_V4{
+class GridIconMenu : public juce::ComboBox{
     
 public:
     GridIconMenu();
@@ -19,15 +19,9 @@ public:
     //Functions for passing through the grid arrays
     void setGridPatterns(std::vector<GridPattern> patterns);
     
-    //remove the text drawing capabilities 
-    void drawComboBox(juce::Graphics&, int, int, bool, int, int, int, int, juce::ComboBox&) override;
-    
-    void positionComboBoxText(juce::ComboBox&, juce::Label& labelToPosition) override;
-    
 private:
     
     std::vector<GridPattern> storedPatterns;
-    GridPattern currentPattern;
     
     //initalising the number of columns and rows
     const int numCol = 3;

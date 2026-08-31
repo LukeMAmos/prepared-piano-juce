@@ -4,7 +4,6 @@
 GridIconMenu::GridIconMenu(){
     
     //initaliser
-    setLookAndFeel(this);
 
 }
 GridIconMenu::~GridIconMenu(){
@@ -14,8 +13,15 @@ GridIconMenu::~GridIconMenu(){
 }
 void GridIconMenu::paint(juce::Graphics &g){
     
+    setColour(ComboBox::textColourId, juce::Colours::transparentBlack); 
+    
     //Draw evenly spaced circles based on the reduced bounds of the component and set the fill of the circle based on the current pattern being used
     auto bounds = getLocalBounds().reduced(5);
+    
+    auto selectedIndex = getSelectedItemIndex();
+    if (selectedIndex < 0 || (size_t)selectedIndex > storedPatterns.size())
+        return;
+    auto& currentPattern = storedPatterns[(size_t) selectedIndex];
     
     //Get number of rows and columns
     size_t nRows = currentPattern.size();
@@ -64,9 +70,6 @@ void GridIconMenu::mouseDown(const juce::MouseEvent &){
     int nextIndex = (currentIndex+1) % numItems;
     //set the new selected Index
     setSelectedItemIndex(nextIndex);
-    
-    //set the current pattern to be used
-    currentPattern = storedPatterns[(size_t)nextIndex];
 }
 
 void GridIconMenu::setGridPatterns(std::vector<GridPattern> patterns){
@@ -74,14 +77,3 @@ void GridIconMenu::setGridPatterns(std::vector<GridPattern> patterns){
     storedPatterns = std::move(patterns);
 }
 
-
-void GridIconMenu::drawComboBox(juce::Graphics&, int, int, bool, int, int, int, int, juce::ComboBox&){
-    
-    //Null
-}
-
-void GridIconMenu::positionComboBoxText(juce::ComboBox&, juce::Label& labelToPosition){
-    
-    labelToPosition.setVisible(false); 
-    
-}
