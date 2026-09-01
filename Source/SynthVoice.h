@@ -47,10 +47,12 @@ public:
         return false;
     }
     
-    void updateValues(int midiNoteNumber, bool updateOSC);
-    
+    //Update the values used by the effects
+    void updateValues(int midiNoteNumber);
+    //Oscillator specific switching function
     void updateOscillator(OSCType type);
     
+    void forceCacheReset();
     
 private:
     
@@ -62,6 +64,7 @@ private:
     juce::AudioBuffer<float> privateBuffer;
     
     //Cache variables to hold previous state
+    NoteParams cachedParamState; 
     
     static constexpr float silenceThreshhold = -60.0f;
     

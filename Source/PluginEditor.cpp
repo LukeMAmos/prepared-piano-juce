@@ -11,6 +11,7 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     // editor's size to whatever you need it to be.
     audioProcessor.keyboardState.addListener(this);
     setSize (900, 500);
+    setLookAndFeel(&customLookAndFeel);
     
     //Visualiser to show the waveform
     //addAndMakeVisible(waveformAudioVisualiser);

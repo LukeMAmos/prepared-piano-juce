@@ -30,7 +30,7 @@ void SynthVoice::startNote(int midiNoteNumber , float velocity , juce::Synthesis
     
     //Update values to be used , start the adsr
     noteParamPosition = midiNoteNumber % 12;
-    updateValues(noteParamPosition, true);
+    updateValues(noteParamPosition);
     OSC.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
     ADSR.noteOn();
 }
@@ -85,7 +85,7 @@ void SynthVoice::pitchWheelMoved(int){}
 
 void SynthVoice::controllerMoved(int, int){}
 
-void SynthVoice::updateValues(int midiNoteNumber, bool updateOSC){
+void SynthVoice::updateValues(int midiNoteNumber){
     
     
     juce::ADSR::Parameters adsrParams;
@@ -107,22 +107,27 @@ void SynthVoice::updateValues(int midiNoteNumber, bool updateOSC){
     
     float inGainDis = data.inputDistortion.load();
     float outGainDis = data.outputDistortion.load();
-    softDistortion.setParameters(inGainDis, outGainDis);
     
     float delayedSampleLevel = data.delayedSampleLevel.load();
     float delayInMS = data.delayMs.load();
 
-    reverb.setParameters(coe,2500.0f, roomSize, wetAm);
-        
-    filter.setParameters(cutoff, resonance, type);
-        
-    delay.setParameters(delayedSampleLevel, delayInMS);
-    
-    if(updateOSC){ //Only switch or update the wave if there has been a change if no change then dont update the wave
-        updateOscillator(data.oscType);
-        previousType = data.oscType;
+    //Guard Values if nothing has been updated, implement epsliom if statements
+    if(cachedParamState.inputDistortion != inGainDis || cachedParamState.outputDistortion != outGainDis){
+        softDistortion.setParameters(inGainDis, outGainDis);
     }
     
+    if(coe != cachedParamState.coe || roomSize != cachedParamState.roomSize || wetAm != cachedParamState.wetLevel){
+        reverb.setParameters(coe,2500.0f, roomSize, wetAm);
+    }
+    
+    if(cutoff != cachedParamState.cutoffFrequency || resonance != cachedParamState.filterResonance || type != cachedParamState.filterType){
+        filter.setParameters(cutoff, resonance, type);
+    }
+    
+    delay.setParameters(delayedSampleLevel, delayInMS);
+    
+    updateOscillator(data.oscType);
+
 }
 
 void SynthVoice::updateOscillator(OSCType type){
@@ -144,3 +149,23 @@ void SynthVoice::updateOscillator(OSCType type){
     
 }
 
+void SynthVoice::forceCacheReset(){
+    //reset the cache each time data is reloaded from XML
+    
+    cachedParamState.attack = 0.0f;
+    cachedParamState.coe = 0.0f;
+    cachedParamState.cutoffFrequency = 0.0f;
+    cachedParamState.decay = 0.0f;
+    cachedParamState.delayMs = 0.0f;
+    cachedParamState.delayedSampleLevel 0.0f;
+    cachedParamState.filterResonance = 0.0f;
+    cachedParamState.filterType = -1;
+    cachedParamState.inputDistortion = 0.0f; ;
+    cachedParamState.oscType = -1;
+    cachedParamState.outputDistortion = 0.0f;
+    cachedParamState.release = 0.0f;
+    cachedParamState.roomSize = 0.0f;
+    cachedParamState.sustain = 0.0f;
+    cachedParamState.wetLevel = 0.0f;
+    
+}

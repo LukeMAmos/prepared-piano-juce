@@ -6,6 +6,7 @@
 #include "UI/MenuDesign.h"
 #include "UI/GridPatterns.h"
 #include "UI/SliderDesign.h"
+#include "UI/CustomLookAndFeel.h"
 
 //==============================================================================
 /**
@@ -77,8 +78,11 @@ private:
     juce::Label reverbLabels[4];
     juce::String reverbLabelNames[4] = {"COE", "Room Size" , "Wet level"};
     
-    //Drawing the live waveform as the audio is outputted
     
+    //Custom LookAndFeel
+    CustomLookAndFeel customLookAndFeel;
+    
+    //Drawing the live waveform as the audio is outputted
     juce::AudioVisualiserComponent waveformAudioVisualiser{1};
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PreparedSynthAudioProcessorEditor)
