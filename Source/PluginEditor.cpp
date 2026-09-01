@@ -21,6 +21,7 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     addAndMakeVisible(setAll);
     setAll.onClick = [this](){
         
+        //Current midi note needs to be normalised to a single octave range 
         audioProcessor.updateAll(currentMidiNote);
         
     };
@@ -227,7 +228,8 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     resonanceLabel.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(resonanceLabel);
     
-    //REVERB
+    
+    //REVERB Label
     
     for(int i = 0 ; i < 3 ; i++){
         
@@ -237,10 +239,10 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
         
     }
     
-    //Distortion
+    //Distortion Label
     
     
-    //Delay
+    //Delay Label 
     
     
 }

@@ -35,7 +35,7 @@ private:
     juce::MidiKeyboardComponent visualKeyboard;
 
     
-    int currentMidiNote = 60;
+    int currentMidiNote = 6;
     
     //Set all to current state button
     juce::TextButton setAll{"Set All"};

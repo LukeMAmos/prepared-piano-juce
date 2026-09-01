@@ -13,7 +13,7 @@ GridIconMenu::~GridIconMenu(){
 }
 void GridIconMenu::paint(juce::Graphics &g){
     
-    g.setColour(juce::Colours::white); // or findColour(ComboBox::outlineColourId), etc.
+    g.setColour(juce::Colours::white);
     
     setColour(ComboBox::textColourId, juce::Colours::transparentBlack);
     
@@ -50,12 +50,14 @@ void GridIconMenu::paint(juce::Graphics &g){
             
             //conditional drawing 
             if(currentPattern[r][c]){
-                //current position is on and should be drawn with fill
+                //current position is on and should be drawn with fill white
+                g.setColour(juce::Colours::white.withBrightness(0.9f));
                 g.fillEllipse(area);
                 
             }else{
-                //current position is off state and should be drawn with no fill 
-                g.drawEllipse(area, lineThickness);
+                //current position is off state and should be drawn with grey
+                g.setColour(juce::Colours::white.withBrightness(0.4f));
+                g.fillEllipse(area);
                 
             }
         }

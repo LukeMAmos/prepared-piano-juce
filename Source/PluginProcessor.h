@@ -52,7 +52,7 @@ public:
     }
     
     
-    //Changing the stored data values for all 128 notes to the currently selected note value
+    //Changing the stored data values for all 12 notes to the currently selected note value
     void updateAll(int currentPos){
         
         //Update all paramters to the current note selected
