@@ -43,6 +43,31 @@ struct NoteParams{
     
 };
 
+struct CachedParams{
+    
+    float attack = 0.1f;
+    float decay = 0.1f;
+    float release = 0.1f;
+    float sustain = 1.0f;
+    
+    int filterType = -1;
+    float filterResonance{0.5f};
+    float cutoffFrequency{2500.0f};
+    
+    float coe{0.5f};
+    float roomSize{0.5f};
+    float wetLevel{0.2f};
+    
+    float inputDistortion{1.0f};
+    float outputDistortion{1.0f};
+    
+    int oscType = -1;
+    
+    float delayedSampleLevel{1.0f};
+    float delayMs{1.0f};
+    
+};
+
 //Namespace to hold the functiosn for creating the Xml and restoring the state of the 
 namespace NoteParamSerial {
     

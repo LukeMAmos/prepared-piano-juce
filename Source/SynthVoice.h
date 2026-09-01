@@ -64,7 +64,7 @@ private:
     juce::AudioBuffer<float> privateBuffer;
     
     //Cache variables to hold previous state
-    NoteParams cachedParamState; 
+    CachedParams cachedParamState; 
     
     static constexpr float silenceThreshhold = -60.0f;
     

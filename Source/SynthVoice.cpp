@@ -120,14 +120,17 @@ void SynthVoice::updateValues(int midiNoteNumber){
         reverb.setParameters(coe,2500.0f, roomSize, wetAm);
     }
     
-    if(cutoff != cachedParamState.cutoffFrequency || resonance != cachedParamState.filterResonance || type != cachedParamState.filterType){
+    if(cutoff != cachedParamState.cutoffFrequency || resonance != cachedParamState.filterResonance || (int)type != cachedParamState.filterType){
         filter.setParameters(cutoff, resonance, type);
     }
     
-    delay.setParameters(delayedSampleLevel, delayInMS);
+    if(delayedSampleLevel != cachedParamState.delayedSampleLevel || delayInMS != cachedParamState.delayMs){
+        delay.setParameters(delayedSampleLevel, delayInMS);
+    }
     
-    updateOscillator(data.oscType);
-
+    if((int)data.oscType != cachedParamState.oscType){
+        updateOscillator(data.oscType);
+    }
 }
 
 void SynthVoice::updateOscillator(OSCType type){
@@ -152,20 +155,20 @@ void SynthVoice::updateOscillator(OSCType type){
 void SynthVoice::forceCacheReset(){
     //reset the cache each time data is reloaded from XML
     
-    cachedParamState.attack = 0.0f;
-    cachedParamState.coe = 0.0f;
-    cachedParamState.cutoffFrequency = 0.0f;
-    cachedParamState.decay = 0.0f;
-    cachedParamState.delayMs = 0.0f;
-    cachedParamState.delayedSampleLevel 0.0f;
-    cachedParamState.filterResonance = 0.0f;
+    cachedParamState.attack = -1.0f;
+    cachedParamState.coe = -1.0f;
+    cachedParamState.cutoffFrequency = -1.0f;
+    cachedParamState.decay = -1.0f;
+    cachedParamState.delayMs = -1.0f;
+    cachedParamState.delayedSampleLevel = -1.0f;
+    cachedParamState.filterResonance = -1.0f;
     cachedParamState.filterType = -1;
-    cachedParamState.inputDistortion = 0.0f; ;
+    cachedParamState.inputDistortion = -1.0f; ;
     cachedParamState.oscType = -1;
-    cachedParamState.outputDistortion = 0.0f;
-    cachedParamState.release = 0.0f;
-    cachedParamState.roomSize = 0.0f;
-    cachedParamState.sustain = 0.0f;
-    cachedParamState.wetLevel = 0.0f;
+    cachedParamState.outputDistortion = -1.0f;
+    cachedParamState.release = -1.0f;
+    cachedParamState.roomSize = -1.0f;
+    cachedParamState.sustain = -1.0f;
+    cachedParamState.wetLevel = -1.0f;
     
 }
