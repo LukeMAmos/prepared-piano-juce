@@ -42,23 +42,23 @@ private:
     
     //Dials to control the values
     dottSlider attack;
-    juce::Slider decay ;
-    juce::Slider release ;
-    juce::Slider sustain ;
+    dottSlider decay ;
+    dottSlider release ;
+    dottSlider sustain ;
     
     GridIconMenu filterType; //0 = none , 1 = lowpass, 2 = highpass
-    juce::Slider filterResonance;
-    juce::Slider cutoffFrequency;
+    dottSlider filterResonance;
+    dottSlider cutoffFrequency;
     
-    juce::Slider coe;
-    juce::Slider roomSize;
-    juce::Slider wetLevel;
+    dottSlider coe;
+    dottSlider roomSize;
+    dottSlider wetLevel;
     
-    juce::Slider disInGain;
-    juce::Slider disOutGain;
+    dottSlider disInGain;
+    dottSlider disOutGain;
     
-    juce::Slider delayWetLevel;
-    juce::Slider delayMs;
+    dottSlider delayWetLevel;
+    dottSlider delayMs;
     
     GridIconMenu oscType;
     

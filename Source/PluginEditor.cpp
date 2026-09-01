@@ -21,8 +21,9 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     addAndMakeVisible(setAll);
     setAll.onClick = [this](){
         
-        //Current midi note needs to be normalised to a single octave range 
-        audioProcessor.updateAll(currentMidiNote);
+        //Current midi note needs to be normalised to a single octave range
+        int normNote = currentMidiNote % 12;
+        audioProcessor.updateAll(normNote);
         
     };
     
