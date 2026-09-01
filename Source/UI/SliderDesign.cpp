@@ -15,6 +15,7 @@ dottSlider::~dottSlider(){
 void dottSlider::paint(juce::Graphics &g){
     
     auto wholeBounds = getLocalBounds();
+    wholeBounds.reduced(8); 
     int x = wholeBounds.getX();
     int y = wholeBounds.getY();
     int width = wholeBounds.getWidth();

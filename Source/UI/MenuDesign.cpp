@@ -13,13 +13,15 @@ GridIconMenu::~GridIconMenu(){
 }
 void GridIconMenu::paint(juce::Graphics &g){
     
-    setColour(ComboBox::textColourId, juce::Colours::transparentBlack); 
+    g.setColour(juce::Colours::white); // or findColour(ComboBox::outlineColourId), etc.
+    
+    setColour(ComboBox::textColourId, juce::Colours::transparentBlack);
     
     //Draw evenly spaced circles based on the reduced bounds of the component and set the fill of the circle based on the current pattern being used
     auto bounds = getLocalBounds().reduced(5);
     
     auto selectedIndex = getSelectedItemIndex();
-    if (selectedIndex < 0 || (size_t)selectedIndex > storedPatterns.size())
+    if (selectedIndex < 0 || (size_t)selectedIndex >= storedPatterns.size())
         return;
     auto& currentPattern = storedPatterns[(size_t) selectedIndex];
     

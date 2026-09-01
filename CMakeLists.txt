@@ -11,6 +11,8 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(JUCE)
 
+juce_add_binary_data(FontData SOURCES Assets/BitcountPropSingle.ttf)
+
 juce_add_plugin(PreparedSynth
 	COMPANY_NAME                "Luke Amos"
     BUNDLE_ID                   com.lukeamos.preparedsynth
@@ -92,7 +94,8 @@ target_compile_definitions(PreparedSynth
 target_link_libraries(PreparedSynth
     PRIVATE
         juce::juce_audio_utils
-	    juce::juce_dsp
+	juce::juce_dsp
+	FontData
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

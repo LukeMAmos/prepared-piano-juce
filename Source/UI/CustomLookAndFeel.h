@@ -1,4 +1,5 @@
 #include "juce_gui_basics/juce_gui_basics.h"
+#include "BinaryData.h"
 
 //Custom Look and feel to change other elements without a custom component
 
@@ -93,6 +94,54 @@ public:
                     roundToInt (textW),
                     roundToInt (textH),
                     Justification::centred, true);
+    }
+    
+    void drawButtonBackground (Graphics& g,
+                                               Button& button,
+                                               const Colour& backgroundColour,
+                                               bool shouldDrawButtonAsHighlighted,
+                                               bool shouldDrawButtonAsDown) override
+    {
+        auto cornerSize = 6.0f;
+        auto bounds = button.getLocalBounds().toFloat().reduced (0.5f, 0.5f);
+        
+        auto fillColour = shouldDrawButtonAsDown? juce::Colours::white : juce::Colours::black;
+        
+        auto baseColour = fillColour;
+        
+        if (shouldDrawButtonAsDown || shouldDrawButtonAsHighlighted)
+            baseColour = baseColour.contrasting (shouldDrawButtonAsDown ? 0.2f : 0.05f);
+
+        g.setColour (baseColour);
+
+        auto flatOnLeft   = button.isConnectedOnLeft();
+        auto flatOnRight  = button.isConnectedOnRight();
+        auto flatOnTop    = button.isConnectedOnTop();
+        auto flatOnBottom = button.isConnectedOnBottom();
+
+        if (flatOnLeft || flatOnRight || flatOnTop || flatOnBottom)
+        {
+            Path path;
+            path.addRoundedRectangle (bounds.getX(), bounds.getY(),
+                                      bounds.getWidth(), bounds.getHeight(),
+                                      cornerSize, cornerSize,
+                                      ! (flatOnLeft  || flatOnTop),
+                                      ! (flatOnRight || flatOnTop),
+                                      ! (flatOnLeft  || flatOnBottom),
+                                      ! (flatOnRight || flatOnBottom));
+
+            g.fillPath (path);
+
+            g.setColour (button.findColour (ComboBox::outlineColourId));
+            g.strokePath (path, PathStrokeType (1.0f));
+        }
+        else
+        {
+            g.fillRoundedRectangle (bounds, cornerSize);
+
+            g.setColour (button.findColour (ComboBox::outlineColourId));
+            g.drawRoundedRectangle (bounds, cornerSize, 1.0f);
+        }
     }
     
 private:

@@ -32,6 +32,7 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     //Load in the grid patterns
     std::vector<GridPattern> patterns = {sinePattern , squarePattern , trianglePattern};
     oscType.setGridPatterns(patterns);
+    oscType.setSelectedId(1,juce::dontSendNotification);
     oscType.onChange = [this](){
         audioProcessor.getNoteParams(currentMidiNote).oscType.store((OSCType)(oscType.getSelectedId() - 1));
     };
@@ -80,6 +81,7 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     filterType.addItem("Bandreject", 4);
     std::vector<GridPattern> fPatterns = {lowpassPattern , highpassPattern , bandpassPattern , bandrejectPattern};
     filterType.setGridPatterns(fPatterns);
+    filterType.setSelectedId(1, juce::dontSendNotification); 
     filterType.onChange = [this](){
         audioProcessor.getNoteParams(currentMidiNote).filterType.store((FilterTypeBiquad)(filterType.getSelectedId() - 1));
     };
