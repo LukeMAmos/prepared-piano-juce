@@ -1,18 +1,18 @@
 #include "SliderDesign.h"
 
-dottedRotarySlider::dottedRotarySlider(){
+dottSlider::dottSlider(){
     
     setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     setRotaryParameters(juce::MathConstants<float>::pi * 1.2f, juce::MathConstants<float>::pi * 2.8f, true);
     
 }
 
-dottedRotarySlider::~dottedRotarySlider(){
+dottSlider::~dottSlider(){
     
     
 }
 
-void dottedRotarySlider::paint(juce::Graphics &g){
+void dottSlider::paint(juce::Graphics &g){
     
     auto wholeBounds = getLocalBounds();
     int x = wholeBounds.getX();

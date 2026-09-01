@@ -40,7 +40,7 @@ private:
     juce::TextButton setAll{"Set All"};
     
     //Dials to control the values
-    dottedRotarySlider attack;
+    dottSlider attack;
     juce::Slider decay ;
     juce::Slider release ;
     juce::Slider sustain ;

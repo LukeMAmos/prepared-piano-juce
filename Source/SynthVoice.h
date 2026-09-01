@@ -47,9 +47,10 @@ public:
         return false;
     }
     
-    void updateValues(int midiNoteNumber);
+    void updateValues(int midiNoteNumber, bool updateOSC);
     
     void updateOscillator(OSCType type);
+    
     
 private:
     
@@ -59,6 +60,8 @@ private:
     juce::ADSR::Parameters adsrParams; 
     int noteParamPosition = 0; 
     juce::AudioBuffer<float> privateBuffer;
+    
+    //Cache variables to hold previous state
     
     static constexpr float silenceThreshhold = -60.0f;
     

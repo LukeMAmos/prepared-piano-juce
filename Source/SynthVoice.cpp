@@ -19,6 +19,7 @@ void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
     
     privateBuffer.setSize((int)spec.numChannels , (int)spec.maximumBlockSize);
     privateBuffer.clear();
+
 }
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound){
@@ -29,7 +30,7 @@ void SynthVoice::startNote(int midiNoteNumber , float velocity , juce::Synthesis
     
     //Update values to be used , start the adsr
     noteParamPosition = midiNoteNumber % 12;
-    updateValues(noteParamPosition);
+    updateValues(noteParamPosition, true);
     OSC.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
     ADSR.noteOn();
 }
@@ -43,6 +44,7 @@ void SynthVoice::stopNote(float  , bool ){
 }
 
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int startSample , int numSamples){
+    
     
     juce::ScopedNoDenormals noDenormals;
     privateBuffer.clear();
@@ -83,7 +85,8 @@ void SynthVoice::pitchWheelMoved(int){}
 
 void SynthVoice::controllerMoved(int, int){}
 
-void SynthVoice::updateValues(int midiNoteNumber){
+void SynthVoice::updateValues(int midiNoteNumber, bool updateOSC){
+    
     
     juce::ADSR::Parameters adsrParams;
     
@@ -115,7 +118,10 @@ void SynthVoice::updateValues(int midiNoteNumber){
         
     delay.setParameters(delayedSampleLevel, delayInMS);
     
-    updateOscillator(data.oscType); 
+    if(updateOSC){ //Only switch or update the wave if there has been a change if no change then dont update the wave
+        updateOscillator(data.oscType);
+        previousType = data.oscType;
+    }
     
 }
 
@@ -137,3 +143,4 @@ void SynthVoice::updateOscillator(OSCType type){
     
     
 }
+
