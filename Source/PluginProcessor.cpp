@@ -110,6 +110,15 @@ void PreparedSynthAudioProcessor::setStateInformation (const void* data, int siz
     if(xml != nullptr){
         NoteParamSerial::restoreStateFromXml(*xml, paramsArray); 
         
+        //Reset the cache so that all voice data gets updated 
+        for(int i = 0 ; i < numVoices; i++){
+            
+            auto voice = static_cast<SynthVoice*>(synth.getVoice(i));
+            
+            if(voice != nullptr){
+                voice->forceCacheReset();
+            }
+        }
     }
     
 }

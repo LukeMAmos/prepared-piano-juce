@@ -19,7 +19,8 @@ void SynthVoice::prepare(const juce::dsp::ProcessSpec& spec){
     
     privateBuffer.setSize((int)spec.numChannels , (int)spec.maximumBlockSize);
     privateBuffer.clear();
-
+    
+    forceCacheReset(); 
 }
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound){
