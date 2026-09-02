@@ -68,7 +68,7 @@ struct CachedParams{
     
 };
 
-//Namespace to hold the functiosn for creating the Xml and restoring the state of the 
+//Namespace to hold the functiosn for creating the Xml and restoring the state of the params 
 namespace NoteParamSerial {
     
     //Creating and storing data

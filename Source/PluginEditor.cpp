@@ -165,7 +165,7 @@ PreparedSynthAudioProcessorEditor::PreparedSynthAudioProcessorEditor (PreparedSy
     addAndMakeVisible(delayWetLevel);
     
     
-    delayMs.setRange(0.0, 10.0);
+    delayMs.setRange(0.0, 200.0);
     delayMs.setSliderStyle(juce::Slider::RotaryVerticalDrag);
     delayMs.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 60, 20);
     delayMs.onValueChange = [this](){

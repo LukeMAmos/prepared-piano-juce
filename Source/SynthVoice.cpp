@@ -34,6 +34,7 @@ void SynthVoice::startNote(int midiNoteNumber , float velocity , juce::Synthesis
     updateValues(noteParamPosition);
     OSC.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
     ADSR.noteOn();
+    currentMidiNote = midiNoteNumber;
 }
 
 void SynthVoice::stopNote(float  , bool ){
@@ -46,6 +47,8 @@ void SynthVoice::stopNote(float  , bool ){
 
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer , int startSample , int numSamples){
     
+    if(isVoiceActive())
+        updateValues(currentMidiNote%12);
     
     juce::ScopedNoDenormals noDenormals;
     privateBuffer.clear();

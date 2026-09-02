@@ -56,6 +56,7 @@ public:
     
 private:
     
+    int currentMidiNote = 60; 
     //OSC and ADSR
     juce::dsp::Oscillator<float> OSC;
     juce::ADSR ADSR;

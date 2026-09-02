@@ -12,7 +12,7 @@ public:
     template<typename... Args>
     void prepare(int numChannels , Args&&... args){
         
-        effects.resize(numChannels);
+        effects.resize((size_t)numChannels);
         
         for(auto& effect : effects)
             effect.prepare(std::forward<Args>(args)...);
@@ -29,7 +29,7 @@ public:
     
     float process(int channel , float input){
         
-        return effects[channel].process(input);
+        return effects[(size_t)channel].process(input);
     }
     
     int getNumChannels(){
